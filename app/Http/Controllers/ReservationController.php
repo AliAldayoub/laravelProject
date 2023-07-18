@@ -91,7 +91,7 @@ class ReservationController extends Controller
 
 
         $doctor = Doctor::find($validatedData['doctor_id']);
-        $doctor->reservations()->sync([$reservation->id]);
+        $doctor->reservations()->sync([$reservation->id, true]);
 
         return redirect()->route('reservationsForUser', ['user_id' => $reservation->user_id])->with('success', 'Reservation updated successfully!');
     }

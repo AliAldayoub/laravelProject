@@ -31,6 +31,7 @@
 <div class="container">
     <h1>Doctor Reservations</h1>
     <div class="form-group">
+        @if ($doctors->count() > 0)
         <label for="doctor_id">Select Doctor:</label>
         <select id="doctor_id" name="doctor_id" class="form-control">
             @foreach ($doctors as $doctor)
@@ -39,7 +40,10 @@
         </select>
         <button type="button" class="btn btn-primary" onclick="loadDoctorReservations()">Load Reservations</button>
     </div>
+    @else
+    <h4>add doctors to be able to select one of them</h4>
     <hr>
+    @endif
     <div id="reservations-container">
          @isset($reservations)
         @if ($reservations->count() > 0)

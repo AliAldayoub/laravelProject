@@ -7,7 +7,7 @@ use App\User;
 
 class Reservation extends Model
 {
-    protected $fillable = ['date', 'time', 'status', 'remarks', 'user_id'];
+    protected $fillable = ['date', 'time', 'remarks', 'user_id'];
 
     public function doctors()
     {

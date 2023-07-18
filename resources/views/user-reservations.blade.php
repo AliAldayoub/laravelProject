@@ -28,66 +28,75 @@
     <div class="col-md-12 mb-30">
         <div class="card card-statistics h-100">
             <div class="card-body">
-<div class="container">
-    <h1>User Reservations</h1>
-    <div class="form-group">
-        <label for="user_id">Select User:</label>
-        <select id="user_id" name="user_id" class="form-control">
-            @foreach ($users as $user)
-            <option value="{{ $user->id }}">{{ $user->name }}</option>
-            @endforeach
-        </select>
-        <button type="button" class="btn btn-primary" onclick="loadUserReservations()">Load Reservations</button>
-    </div>
-    <hr>
-    <div id="reservations-container">
-        @isset($reservations)
-        @if ($reservations->count() > 0)
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Remarks</th>
-                    <th>Doctor</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($reservations as $reservation)
-                <tr>
-                    <td>{{ $reservation->id }}</td>
-                    <td>{{ $reservation->date }}</td>
-                    <td>{{ $reservation->time }}</td>
-                    <td>{{ $reservation->remarks }}</td>
-                    <td>
-    @foreach ($reservation->doctors as $doctor)
-        {{ $doctor->name }}<br>
-    @endforeach
-</td>
+                <div class="container">
+                    <h1>User Reservations</h1>
+                    <div class="form-group">
+                        @if ($users->count() > 0)
+                        <label for="user_id">Select User:</label>
+                        
+                        <select id="user_id" name="user_id" class="form-control">
+                            
+                            @foreach ($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                        <button type="button" class="btn btn-primary" onclick="loadUserReservations()">Load Reservations</button>
+                    </div>
+                    @else
+                    <h4>add users to be able to select one of them</h4>
+                    <hr>
+                    @endif
+                    <div id="reservations-container">
+                        @isset($reservations)
+                        @if ($reservations->count() > 0)
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Remarks</th>
+                                    <th>Doctor</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($reservations as $reservation)
+                                <tr>
+                                    <td>{{ $reservation->id }}</td>
+                                    <td>{{ $reservation->date }}</td>
+                                    <td>{{ $reservation->time }}</td>
+                                    <td>{{ $reservation->remarks }}</td>
+                                    <td>
+                                        @foreach ($reservation->doctors as $doctor)
+                                            {{ $doctor->name }}<br>
+                                        @endforeach
+                                    </td>
 
-                    <td>
-                        <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-primary">Edit</a>
-                        <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" style="display: inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        @else
-        <h3>No reservations to display</h3>
-        @endif
-        @else
-        <h3>Please select a user to get reservations</h3>
-    @endisset
+                                    <td>
+                                        <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-primary">Edit</a>
+                                        <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" style="display: inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        @else
+                        <h3>No reservations to display</h3>
+                        @endif
+                        @else
+                        <h3>Please select a user to get reservations</h3>
+                    @endisset
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
 @endsection
 @section('js')
 <script>   
