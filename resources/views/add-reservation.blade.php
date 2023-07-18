@@ -6,7 +6,7 @@
 @stop
 @endsection
 @section('page-header')
-<!-- breadcrumb -->
+
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
@@ -20,22 +20,22 @@
         </div>
     </div>
 </div>
-<!-- breadcrumb -->
+
 @endsection
 @section('content')
-<!-- row -->
+
 <div class="row">
     <div class="col-md-12 mb-30">
         <div class="card card-statistics h-100">
             <div class="card-body">
-                <!-- create.blade.php -->
+                
 <form action="{{ isset($reservation) ? route('reservations.update', $reservation->id) : route('reservations.store') }}" method="POST">
     @csrf
     @if (isset($reservation))
         @method('PUT')
     @endif
 
-    <!-- User information -->
+    
     <div class="form-group">
         <label for="user_name">Name:</label>
         <input type="text" id="user_name" name="user_name" class="form-control" value="{{ isset($reservation) ? $reservation->user->name : '' }}" {{ isset($reservation) ? 'readonly' : 'required' }}>
@@ -51,7 +51,7 @@
 
 
 
-    <!-- Doctor selection -->
+    
     <div class="form-group">
         <label for="doctor_id">Select a Doctor:</label>
         <select id="doctor_id" name="doctor_id" class="form-control" required>
@@ -61,7 +61,7 @@
         </select>
     </div>
 
-    <!-- Reservation details -->
+    
     <div class="form-group">
         <label for="date">Date:</label>
         <input type="date" id="date" name="date" class="form-control" value="{{ isset($reservation) ? $reservation->date : '' }}" required>
@@ -84,7 +84,7 @@
         </div>
     </div>
 </div>
-<!-- row closed -->
+
 @endsection
 @section('js')
 
